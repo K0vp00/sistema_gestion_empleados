@@ -1,3 +1,5 @@
+CREATE DATABASE GESTION_EMPLEADOS;
+
 CREATE TABLE proyecto (
     id_proyecto INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(30) NOT NULL,
@@ -77,7 +79,7 @@ ALTER TABLE informe ADD FOREIGN KEY(id_empleado) REFERENCES empleado (id_emplead
 ALTER TABLE accesos ADD FOREIGN KEY(id_modulo) REFERENCES modulos (id_modulo);
 ALTER TABLE accesos ADD FOREIGN KEY(id_tipoEmpleado) REFERENCES tipoEmpleado (id_tipoEmpleado);
 ALTER TABLE proyectoEmpleado ADD FOREIGN KEY(id_proyecto) REFERENCES proyecto (id_proyecto);
-ALTER TABLE departamento ADD FOREIGN KEY(id_departamento) REFERENCES departamentoEmpleado (id_departameto);
+ALTER TABLE departamento ADD FOREIGN KEY(id_departamento) REFERENCES departamentoEmpleado (id_departamento);
 ALTER TABLE proyectoEmpleado ADD FOREIGN KEY(id_empleado) REFERENCES empleado (id_empleado);
 ALTER TABLE departamentoEmpleado ADD FOREIGN KEY(id_empleado) REFERENCES empleado (id_empleado);
 ALTER TABLE empleado ADD FOREIGN KEY(id_tipoEmpleado) REFERENCES tipoEmpleado (id_tipoEmpleado);
