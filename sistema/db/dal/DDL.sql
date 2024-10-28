@@ -1,4 +1,3 @@
-CREATE DATABASE GESTION_EMPLEADOS;
 
 CREATE TABLE proyecto (
     id_proyecto INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -21,6 +20,7 @@ CREATE TABLE registroTiempo (
 
 CREATE TABLE empleado (
     id_empleado INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    rut VARCHAR(15)
     nombre VARCHAR(30) NOT NULL,
     direccion VARCHAR(30) NOT NULL,
     telefono VARCHAR(30) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE departamentoEmpleado (
 
 CREATE TABLE departamento (
     id_departamento INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    departametno_nombre VARCHAR(30) NOT NULL,
+    departamento_nombre VARCHAR(30) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     id_empleado INTEGER NOT NULL
 );
@@ -75,12 +75,13 @@ CREATE TABLE modulos (
     nombre VARCHAR(40) NOT NULL
 );
 
-ALTER TABLE informe ADD FOREIGN KEY(id_empleado) REFERENCES empleado (id_empleado);
-ALTER TABLE accesos ADD FOREIGN KEY(id_modulo) REFERENCES modulos (id_modulo);
-ALTER TABLE accesos ADD FOREIGN KEY(id_tipoEmpleado) REFERENCES tipoEmpleado (id_tipoEmpleado);
-ALTER TABLE proyectoEmpleado ADD FOREIGN KEY(id_proyecto) REFERENCES proyecto (id_proyecto);
-ALTER TABLE departamento ADD FOREIGN KEY(id_departamento) REFERENCES departamentoEmpleado (id_departamento);
-ALTER TABLE proyectoEmpleado ADD FOREIGN KEY(id_empleado) REFERENCES empleado (id_empleado);
-ALTER TABLE departamentoEmpleado ADD FOREIGN KEY(id_empleado) REFERENCES empleado (id_empleado);
-ALTER TABLE empleado ADD FOREIGN KEY(id_tipoEmpleado) REFERENCES tipoEmpleado (id_tipoEmpleado);
-ALTER TABLE registroTiempo ADD FOREIGN KEY(id_proyectoEmpleado) REFERENCES proyectoEmpleado (id_proyectoEmpleado);
+ALTER TABLE informe ADD FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado);
+ALTER TABLE accesos ADD FOREIGN KEY (id_modulo) REFERENCES modulos (id_modulo);
+ALTER TABLE accesos ADD FOREIGN KEY (id_tipoEmpleado) REFERENCES tipoEmpleado (id_tipoEmpleado);
+ALTER TABLE proyectoEmpleado ADD FOREIGN KEY (id_proyecto) REFERENCES proyecto (id_proyecto);
+ALTER TABLE departamento ADD FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado);
+ALTER TABLE departamentoEmpleado ADD FOREIGN KEY (id_departamento) REFERENCES departamento (id_departamento);
+ALTER TABLE proyectoEmpleado ADD FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado);
+ALTER TABLE departamentoEmpleado ADD FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado);
+ALTER TABLE empleado ADD FOREIGN KEY (id_tipoEmpleado) REFERENCES tipoEmpleado (id_tipoEmpleado);
+ALTER TABLE registroTiempo ADD FOREIGN KEY (id_proyectoEmpleado) REFERENCES proyectoEmpleado (id_proyectoEmpleado);
