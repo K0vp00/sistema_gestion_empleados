@@ -24,12 +24,14 @@ VALUES
 INSERT INTO proyecto (nombre, descripcion, fecha_inicio, fecha_fin) VALUES
 ('Desarrollo de App Móvil', 'Aplicación para gestionar tareas diarias', '2024-01-10', '2024-06-15'),
 ('Sistema de Gestión de Inventario', 'Sistema para control de stock en tiempo real', '2024-03-05', '2024-09-30');
+('HRConnect', 'Plataforma de Bienestar y Desarrollo Profesional', '2024-03-05', '2024-09-30');
 
 -- Insertar departamentos
 INSERT INTO departamento (departamento_nombre, telefono, id_empleado) VALUES
-('Desarrollo', '555-1234', 1),
+('Desarrollo Sostenible', '555-1234', 1),
 ('Recursos Humanos', '555-5678', 2),
-('Administración', '555-8765', 3);
+('Investigacion y Desarrollo', '555-8765', 3);
+('Ventas', '555-8765', 4);
 
 -- Insertar relación entre empleados y proyectos
 INSERT INTO proyectoEmpleado (id_proyecto, id_empleado) VALUES

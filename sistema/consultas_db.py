@@ -1,7 +1,8 @@
-from conect_db import config
-import mysql.connector
 
-def DB_consulta(Consulta):    
+
+def DB_consulta(Consulta): 
+    from conect_db import config
+    import mysql.connector   
     cnx = mysql.connector.connect(**config)
 
     cursor = cnx.cursor()

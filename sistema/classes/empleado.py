@@ -8,45 +8,21 @@ class Empleado():
         self.contrasena = contrasena
         self.tipo_empleado = tipo_empleado
     
-    @staticmethod
+    @staticmethod #Para detarminar el metodo como estatico y no depender de una instancia para su uso, falicitando el la pnatalla de inicio
     def validarDatos(rut, contrasena):
-        import mysql.connector
+        from consultas_db import DB_consulta
         import bcrypt
-        try:
-            # Conectar a la base de datos MySQL
-            conexion = mysql.connector.connect(
-                host="127.0.0.1", 
-                user="root",
-                password="",
-                database="sistema_gestion_empleados" 
-            )
-            
-            cursor = conexion.cursor()
-            
-            # Consulta para validar el rut y la contraseña
-            consulta = "SELECT * FROM empleados WHERE rut = %s"
-            
+        if resultado :
+            query = f"SELECT RUT FROM EMPLEADOS WHERE rut = {rut} "
+            resultado = DB_consulta(query)
             contrasena = contrasena.encode()
             sal = bcrypt.gensalt()
             hashContrasena = bcrypt.hashpw(contrasena,sal)
-            cursor.execute(consulta, (rut, hashContrasena))
-            
-            # Verificar si el usuario existe
-            resultado = cursor.fetchone()
-            
-            if resultado:
-                print("Inicio de sesión exitoso")
+            if bcrypt.checkpw(hashContrasena.encode(),resultado.encode()):
                 return True
             else:
-                print("Rut o contraseña incorrectos")
+                print('contraseña incorrecta')
                 return False
-
-        except mysql.connector.Error as err:
-            print(f"Error al conectar a la base de datos: {err}")
+        else:
+            print('no se encontro el rut ingresado, intente de nuevo')
             return False
-        
-        finally:
-            # Cerrar la conexión a la base de datos
-            if conexion.is_connected():
-                cursor.close()
-                conexion.close()
