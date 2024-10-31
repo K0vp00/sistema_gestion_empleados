@@ -1,7 +1,7 @@
 from empleado import Empleado
 from consultas_db import DB_consulta
 print('Bienvenido al sistema de EcoTech Solutions\nIngrese sus crecenciales')
-Rut = input('Rut: ')
+Rut = input('Rut (con puntos y guion): ')
 Clave = input('Clave: ')
 
 if Empleado.validarDatos(Rut,Clave):

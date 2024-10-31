@@ -1,5 +1,4 @@
-
-
+# esta unica funcion se encarga de conectar y consultar datos con la bd, con esto implementamos mas seguridad y reducimos la posibilidad de errores
 def DB_consulta(Consulta): 
     from conect_db import config
     import mysql.connector   
@@ -28,6 +27,6 @@ def DB_consulta(Consulta):
     cursor.close()
     cnx.close()
 
-#pruba de conexion con base de datos
-query = ("SELECT * FROM empleado WHERE rut = '12345678-9';")
+#prueba de conexion con base de datos
+query = ("SELECT rut, nombre, direccion, telefono, correo FROM empleado WHERE rut = '12.234.567-7';")
 DB_consulta(query)
