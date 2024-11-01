@@ -1,68 +1,62 @@
--- Insertar tipos de empleado
-INSERT INTO tipoEmpleado (tipo, permisos) VALUES
-('Administrador', 'Acceso total'),
-('Desarrollador', 'Acceso a desarrollo y informes'),
-('Analista', 'Acceso a informes y proyectos');
+-- datos `estado`
+INSERT INTO estado (nombre_estado) VALUES ('activado'), ('deshabilitado');
 
--- Insertar módulos
-INSERT INTO modulos (id_modulo, nombre) VALUES
-('MOD01', 'Gestión de Proyectos'),
-('MOD02', 'Gestión de Recursos'),
-('MOD03', 'Informes');
+-- datos `proyectos`
+INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin) VALUES 
+('proyecto solar', 'instalación de paneles solares', '2024-01-10', '2024-06-15'),
+('sistema de gestión', 'desarrollo de software ERP', '2024-02-01', '2024-11-30'),
+('renovación de red', 'mejora de red de datos', '2023-11-20', '2024-03-10');
 
--- Insertar empleados
-INSERT INTO empleados (rut, nombre, direccion, telefono, correo, fecha_inicio, salario, fecha_nacimiento, contrasena, id_tipoEmpleado)VALUES 
-('12.234.567-7','Juan Pérez', 'Av. Libertad 123', '987654321', 'juan.perez@example.com', '2021-06-15', 1500000, '1985-04-20', 'Jperez85!', 1),
-('23.532.734-6','Ana Vidal', 'Calle Central 456', '987123456', 'ana.gomez@example.com', '2022-01-05', 1800000, '1990-09-12', 'Agomez90$', 2),
-('20.746.237-5','Carlos Ruiz', 'Pasaje Norte 789', '987987654', 'carlos.ruiz@example.com', '2020-11-20', 2000000, '1982-12-01', 'Cruiz82*', 1),
-('21.524.759-4','Laura Torres', 'Av. Sur 321', '987654987', 'laura.torres@example.com', '2019-03-27', 2100000, '1992-03-08', 'Ltorres92#', 3),
-('8.845.273-9','Pedro Sánchez', 'Calle Este 654', '987321654', 'pedro.sanchez@example.com', '2023-07-12', 1300000, '1988-07-19', 'Psanchez88&', 2),
-('14.673.955-6','Sofía Hernández', 'Boulevard Oeste 852', '987456789', 'sofia.hernandez@example.com', '2021-09-18', 2000000, '1995-02-14', 'Shernandez95%', 1);
+-- datos `registroTiempo`
+INSERT INTO registroTiempo (nombre, direccion, telefono, correo, fecha_inicio, salario, id_proyectoEmpleado) VALUES 
+('carlos lópez', 'av. central 123', '555-0112', 'clopez@etech.cl', '2024-01-10', 300000, 1),
+('ana martínez', 'calle luna 45', '555-0234', 'amartinez@etech.cl', '2024-03-20', 250000, 2),
+('pedro torres', 'av. sol 789', '555-0345', 'ptorres@etech.cl', '2023-12-01', 280000, 3);
 
--- Insertar proyectos
-INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin) VALUES
-('Desarrollo de App Móvil', 'Aplicación para gestionar tareas diarias', '2024-01-10', '2024-06-15'),
-('Sistema de Gestión de Inventario', 'Sistema para control de stock en tiempo real', '2024-03-05', '2024-09-30'),
-('HRConnect', 'Plataforma de Bienestar y Desarrollo Profesional', '2024-03-05', '2024-09-30');
+-- datos `empleados`
+INSERT INTO empleados (rut, nombre, direccion, telefono, correo, fecha_inicio, salario, fecha_nacimiento, contrasena, id_tipoEmpleado, estado) VALUES 
+('12345678-4', 'maría pérez', 'calle ohiggins 123', '555-1234', 'mperez@etech.cl', '2024-01-15', 3200000, '1990-04-10', 'Mperez85!', 1, 1),-- Mperez85!
+('20765432-7', 'juan soto', 'av. real 456', '555-5678', 'jsoto@etech.cl', '2023-09-01', 2800000, '1988-09-22', 'Jsoto456#', 2, 2),-- Jsoto456#
+('18654321-6', 'luis herrera', 'calle norte 789', '555-8765', 'lherrera@etech.cl', '2024-05-10', 3000000, '1995-02-14', 'LHerrera789&', 1, 1);-- LHerrera789&
 
--- Insertar departamentos
-INSERT INTO departamentos (departamento_nombre, telefono, id_empleado) VALUES
-('Desarrollo Sostenible', '555-1234', 1),
-('Recursos Humanos', '555-5678', 2),
-('Investigacion y Desarrollo', '555-8765', 3),
-('Ventas', '555-8765', 4);
+-- datos `informe`
+INSERT INTO informe (nombre_informe, fecha_creacion, id_empleado) VALUES 
+('reporte mensual', '2024-06-01', 1),
+('evaluación semestral', '2024-07-01', 2),
+('análisis de cierre', '2024-10-15', 3);
 
--- Insertar relación entre empleados y proyectos
-INSERT INTO proyectoEmpleado (id_proyecto, id_empleado) VALUES
-(1, 1), -- juan Pérez esta en el proyecto desarrollo app movil
-(1, 2), -- Ana Vidal esta en el proyecto desarrollo app movil
-(2, 3), -- Carlos Ruiz esta en el proyecto sistema de gestion de inventarios
-(2, 4), -- Laura Torres esta en el proyecto sistema de gestion de inventarios  
-(3, 5); -- Pedro Sánchez esta en el proyecto HRConnect
+-- datos `departamentos`
+INSERT INTO departamentos (departamento_nombre, telefono, id_empleado) VALUES 
+('ventas', '555-1111', 1),
+('recursos humanos', '555-2222', 2),
+('desarrollo', '555-3333', 3);
 
--- Insertar registros de tiempo
-INSERT INTO registroTiempo (nombre, direccion, telefono, correo, fecha_inicio, salario, id_proyectoEmpleado) VALUES
-('Juan Pérez', 'Calle Falsa 123', '555-0001', 'juan@example.com', '2024-01-10', 3000, 1),
-('Ana Gómez', 'Avenida Siempre Viva 456', '555-0002', 'ana@example.com', '2024-01-10', 2500, 1),
-('Luis Martínez', 'Boulevard Libertad 789', '555-0003', 'luis@example.com', '2024-03-05', 2200, 2);
+-- datos `tipoEmpleado`
+INSERT INTO tipoEmpleado (tipo, permisos) VALUES 
+('administrador', 'acceso_total, editar_empleados'),
+('desarrollador', 'acceso_codigo, editar_codigo'),
+('analista', 'ver_informes, editar_informes');
 
--- Insertar informes
-INSERT INTO informe (nombre_informe, fecha_creacion, id_empleado) VALUES
-('Informe de Progreso del Proyecto Móvil', '2024-04-01', 1),
-('Informe de Inventario', '2024-06-01', 3);
+-- datos `modulos`
+INSERT INTO modulos (id_modulo, nombre) VALUES 
+('MOD001', 'gestión de empleados'),
+('MOD002', 'desarrollo de proyectos'),
+('MOD003', 'análisis y reportes');
 
--- Insertar accesos
-INSERT INTO accesos (id_modulo, id_tipoEmpleado) VALUES
-('MOD01', 1),  -- Administrador tiene acceso a Gestión de Proyectos
-('MOD01', 2),  -- Desarrollador tiene acceso a Gestión de Proyectos
-('MOD02', 1),  -- Administrador tiene acceso a Gestión de Recursos
-('MOD02', 2),  -- Desarrollador tiene acceso a Gestión de Recursos
-('MOD03', 1),  -- Administrador tiene acceso a Informes
-('MOD03', 2),  -- Desarrollador tiene acceso a Informes
-('MOD03', 3);  -- Analista tiene acceso a Informes
+-- datos `accesos`
+INSERT INTO accesos (id_modulo, id_tipoEmpleado) VALUES 
+('MOD001', 1),
+('MOD002', 2),
+('MOD003', 3);
 
--- Insertar datos en la tabla departamentoEmpleado
-INSERT INTO departamentoEmpleado (id_departamento, id_empleado) VALUES
-(1, 1),  -- Juan Pérez asignado al departamento de Desarrollo
-(2, 2),  -- Ana Gómez asignada al departamento de Recursos Humanos
-(3, 3);  -- Luis Martínez asignado al departamento de Administración
+-- datos `proyectoEmpleado`
+INSERT INTO proyectoEmpleado (id_proyecto, id_empleado) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
+
+-- datos `departamentoEmpleado`
+INSERT INTO departamentoEmpleado (id_departamento, id_empleado) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
