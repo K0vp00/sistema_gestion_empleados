@@ -1,5 +1,5 @@
 -- datos `estado`
-INSERT INTO estado (nombre_estado) VALUES ('activado'), ('deshabilitado');
+INSERT INTO estado (nombre_estado) VALUES ('activo'), ('deshabilitado');
 
 -- datos `proyectos`
 INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin) VALUES 
@@ -15,9 +15,9 @@ INSERT INTO registroTiempo (nombre, direccion, telefono, correo, fecha_inicio, s
 
 -- datos `empleados`
 INSERT INTO empleados (rut, nombre, direccion, telefono, correo, fecha_inicio, salario, fecha_nacimiento, contrasena, id_tipoEmpleado, estado) VALUES 
-('12345678-4', 'maría pérez', 'calle ohiggins 123', '555-1234', 'mperez@etech.cl', '2024-01-15', 3200000, '1990-04-10', 'Mperez85!', 1, 1),-- Mperez85!
-('20765432-7', 'juan soto', 'av. real 456', '555-5678', 'jsoto@etech.cl', '2023-09-01', 2800000, '1988-09-22', 'Jsoto456#', 2, 2),-- Jsoto456#
-('18654321-6', 'luis herrera', 'calle norte 789', '555-8765', 'lherrera@etech.cl', '2024-05-10', 3000000, '1995-02-14', 'LHerrera789&', 1, 1);-- LHerrera789&
+('12345678-4', 'maría pérez', 'calle ohiggins 123', '555-1234', 'mperez@etech.cl', '2024-01-15', 3200000, '1990-04-10', 'Mperez85!', 1, 1),
+('20765432-7', 'juan soto', 'av. real 456', '555-5678', 'jsoto@etech.cl', '2023-09-01', 2800000, '1988-09-22', 'Jsoto456#', 2, 2),
+('18654321-6', 'luis herrera', 'calle norte 789', '555-8765', 'lherrera@etech.cl', '2024-05-10', 3000000, '1995-02-14', 'LHerrera789&', 1, 1);
 
 -- datos `informe`
 INSERT INTO informe (nombre_informe, fecha_creacion, id_empleado) VALUES 

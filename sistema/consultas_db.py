@@ -11,7 +11,7 @@ def DB_consulta_validar(Consulta, rut):
             cursor = cnx.cursor()
             
             # Ejecutar la consulta pasando 'rut' como tupla
-            cursor.execute(Consulta, (rut))
+            cursor.execute(Consulta, (rut,))
 
             # Obtener los resultados
             rows = cursor.fetchall()
@@ -58,6 +58,7 @@ def DB_consulta(Consulta):
     finally:
         if 'cnx' in locals() and cnx.is_connected():
             cnx.close()
+            
 # Funcion para insertar datos a la BD
 def DB_insertar(query,values):
     import mysql.connector

@@ -1,28 +1,13 @@
-
-def iniciar_sesion():
-    from empleados import Empleado
-    import getpass
-    print('Bienvenido al sistema de EcoTech Solutions\nIngrese sus credenciales')
-    rut = input('Rut (con guion y digito verificador): ')
-    contrasena = getpass.getpass("Introduce tu contraseña: ")
-    if Empleado.validarDatos(rut,contrasena):
-         print('Bienvenido, usuario autenticado')
-         return rut
-    else:     
-        print('Credenciales invalidas')
-        return
-
-
 def interfaz(rut):
     from consultas_db import DB_consulta_validar
-    from empleados import CRUD_empleados
+    from classes.empleados import CRUD_empleados
     from classes.informe import Informe
     from classes.proyectos import Proyectos
-    print('Plataforma EcoTech Solutions')
-    query = "SELECT t.tipo FROM empleados e INNER JOIN tipoEmpleado t ON t.id_tipoEmpleado = e.id_tipoEmpleado where rut = ?;"
+    print('\n--------------------------------------------\n|Plataforma EcoTech Solutions|\n--------------------------------------------\n')
+    query = "SELECT t.tipo FROM empleados e INNER JOIN tipoEmpleado t ON t.id_tipoEmpleado = e.id_tipoEmpleado where rut = %s;"
     resultado = DB_consulta_validar(query,rut)
     if resultado:
-        tipo_empleado = resultado[0]
+        tipo_empleado = resultado[0][0]
 
         if tipo_empleado == "Administrador":
             opcion = input('Elija una de las siguientes opciones: \n1.- Gestion empleados\n2.- Gestion informes\n3.- Gestion proyectos\nOpción: ')
@@ -79,3 +64,46 @@ def interfaz(rut):
             return
     else:
         print("No se encontró el tipo de empleado asociado al RUT ingresado.")
+
+def iniciar_sesion():
+    from classes.empleados import Empleado
+    from consultas_db import DB_consulta_validar
+    import getpass
+
+    print('--------------------------------------------\n|Bienvenido al sistema de EcoTech Solutions|\n--------------------------------------------\n\nIngrese sus credenciales: \n')
+
+    rut = input('Rut (con guion y digito verificador): ')
+    query = "SELECT nombre_estado FROM empleados emp INNER JOIN estado est ON emp.estado = est.id_estado WHERE rut = %s;"
+    resultado = DB_consulta_validar(query,rut)
+    estado = resultado[0][0].strip().lower() if resultado else None
+    if estado == 'activo':
+        intentos = 3
+        while intentos > 0:  
+            contrasena = getpass.getpass("Introduce tu contraseña: ")
+            if Empleado.validarDatos(rut,contrasena):
+                print('Bienvenido, usuario autenticado')
+                interfaz(rut)
+                return
+        else:
+            intentos -=1   
+            print(f'Credenciales invalidas. Te quedan {intentos} intentos.')
+        print('¡Acceso denegado!, Has excedido el número máximo de intentos.')
+    elif estado == "deshabilitado": 
+        print('Cuenta deshabilitada. ¡Actualice el estado, si se utilizara la cuenta!')
+    else:
+        print("¡Hasta luego!")
+
+#Datos para pruebas
+''' maria perez "activo" (adm)
+    rut: 12345678-4
+    clave: Mperez85!  '''
+
+'''juan soto "desabilitado" (analista)
+    rut: 20765432-7 
+    clave: Jsoto456# '''
+
+''' luis herrera "activo" (desarrollador)
+    rut: 18654321-6
+    clave: Jsoto456# '''
+
+iniciar_sesion()

@@ -43,7 +43,7 @@ CREATE TABLE empleados (
     fecha_inicio DATE NOT NULL,
     salario INTEGER NOT NULL,
     fecha_nacimiento DATE NOT NULL,
-    contrasena VARCHAR(90) NOT NULL,
+    contrasena VARCHAR(60) NOT NULL,
     id_tipoEmpleado INTEGER NOT NULL,
     estado INTEGER NOT NULL,
     FOREIGN KEY (estado) REFERENCES estado(id_estado)

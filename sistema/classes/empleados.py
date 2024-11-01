@@ -3,12 +3,12 @@ class Empleado:
     @staticmethod #Para determinar el metodo como estatico y no depender de una instancia para su uso, falicitando el la pnatalla de inicio
     def validarDatos(rut, contrasena):
         from consultas_db import DB_consulta_validar
-        from empleados import Empleado
-        query = f"SELECT contrasena FROM EMPLEADOS WHERE rut = ? "
-        resultado = DB_consulta_validar(query,(rut))
+        from classes.empleados import Empleado
+        query = "SELECT contrasena FROM EMPLEADOS WHERE rut = %s "
+        resultado = DB_consulta_validar(query,rut)
         if resultado :
-            hash_contrasena = resultado[0]
-            return Empleado.Desencriptar(contrasena,hash_contrasena)
+            hash_contrasena = resultado[0][0]
+            return Empleado.validar_contrasena(contrasena,hash_contrasena)
         else:
             print('no se encontro el rut ingresado, intente de nuevo')
             return False
@@ -17,10 +17,10 @@ class Empleado:
     def Encriptar(contrasena):
         import bcrypt
         hashContrasena = bcrypt.hashpw(contrasena.encode('utf-8'),bcrypt.gensalt())
-        return hashContrasena
+        return hashContrasena.decode('utf-8')
     
-    @staticmethod
-    def Desencriptar(contrasena,hash_contrasena):
+    @staticmethod #"desencriptar" o valiadar si la contraseña es la misma
+    def validar_contrasena(contrasena,hash_contrasena):
         import bcrypt
         if bcrypt.checkpw(contrasena.encode('utf-8'),hash_contrasena.encode()):
             print('Inicio exitoso')
@@ -42,7 +42,7 @@ class CRUD_empleados(Empleado):
             print("Error: Debe ingresar 1 para habilitar o 2 para deshabilitar.")
             return
 
-        query = "UPDATE empleados SET estado = ? WHERE rut = ?"
+        query = "UPDATE empleados SET estado = %s WHERE rut = %s"
         try:
             # Ejecuta la consulta con los valores como una tupla
             DB_actualizar(query, (valor, rut_empleado))
@@ -80,8 +80,8 @@ class CRUD_empleados(Empleado):
                 if estado not in [1, 2]:
                     print("Error: Debe ingresar 1 para habilitar o 2 para deshababilitar.")
                     return
-                query = '''INSERT INTO empleados (rut, nombre,direccion, telefono, correo, fecha_inicio, salario, fecha_nacimiento, contrasena, id_tipoEmpleado, estado)
-                values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? );'''
+                query = '''INSERT INTO empleados (rut, nombre, direccion, telefono, correo, fecha_inicio, salario, fecha_nacimiento, contrasena, id_tipoEmpleado, estado)
+                values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s );'''
                 encriptar_contrasena = Empleado.Encriptar(contrasena)
                 values = (rut, nombre.lower(), direccion.lower(), telefono, correo.lower(), fecha_inicio, salario, fecha_nacimiento, encriptar_contrasena, id_tipoEmpleado, estado)
 
