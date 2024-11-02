@@ -21,13 +21,11 @@ class Empleado:
     
     @staticmethod #"desencriptar" o valiadar si la contraseña es la misma
     def validar_contrasena(contrasena,hash_contrasena):
+        import getpass
         import bcrypt
         if bcrypt.checkpw(contrasena.encode('utf-8'),hash_contrasena.encode()):
             print('Inicio exitoso')
             return True
-        else:
-            print('contraseña incorrecta')
-            return False
 
 class CRUD_empleados(Empleado): 
 

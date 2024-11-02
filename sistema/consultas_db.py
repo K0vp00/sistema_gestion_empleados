@@ -31,7 +31,6 @@ def DB_consulta_validar(Consulta, rut):
             cursor.close()
         if cnx:
             cnx.close()
-            print("Conexión cerrada")
 # Funcion para Consultar datos en la BD
 def DB_consulta(Consulta): 
     from conect_db import config
@@ -86,7 +85,6 @@ def DB_insertar(query,values):
             cursor.close()
         if cnx and cnx.is_connected():
             cnx.close()
-            print("Conexión cerrada")
             
 # Funcion para actualizar datos en la BD
 def DB_actualizar(query,rut,dato):
@@ -122,4 +120,3 @@ def DB_actualizar(query,rut,dato):
             cursor.close()
         if cnx and cnx.is_connected():
             cnx.close()
-            print("Conexión cerrada")

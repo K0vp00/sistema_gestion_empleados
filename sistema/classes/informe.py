@@ -4,7 +4,7 @@ class Informe:
     @staticmethod
     def ver_informes():
         from consultas_db import DB_consulta
-        query = '''SELECT nombre, DATE_FORMAT(fecha_creacion, '%d/%m/%Y'),id_empleado FROM informe'''
+        query = "SELECT nombre_informe, DATE_FORMAT(fecha_creacion, '%d/%m/%Y') as fecha_creacion, id_empleado FROM informe;"
         DB_consulta(query)
     
     @staticmethod

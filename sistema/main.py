@@ -29,6 +29,7 @@ def interfaz(rut):
                     Informe().crear_informe()
                 elif opcion == "2":
                     Informe().ver_informes()
+                    interfaz(rut)
                 else:
                     print("Opción inválida.")
                 
@@ -78,17 +79,11 @@ def iniciar_sesion():
     resultado = DB_consulta_validar(query,rut)
     estado = resultado[0][0].strip().lower() if resultado else None
     if estado == 'activo':
-        intentos = 3
-        while intentos > 0:  
-            contrasena = getpass.getpass("Introduce tu contraseña: ")
-            if Empleado.validarDatos(rut,contrasena):
-                print('Bienvenido, usuario autenticado')
-                interfaz(rut)
-                return
-        else:
-            intentos -=1   
-            print(f'Credenciales invalidas. Te quedan {intentos} intentos.')
-        print('¡Acceso denegado!, Has excedido el número máximo de intentos.')
+        contrasena = getpass.getpass("Introduce tu contraseña: ")
+        if Empleado.validarDatos(rut,contrasena):
+            print('\nBienvenido')
+            interfaz(rut)
+            return
     elif estado == "deshabilitado": 
         print('Cuenta deshabilitada. ¡Actualice el estado, si se utilizara la cuenta!')
     else:
@@ -108,7 +103,6 @@ def iniciar_sesion():
     rut: 18654321-6
     clave: Jsoto456# '''
 
-'''iniciar una sola vez encriptacion_contrasenas_DB para actulizar la contraseña de texto a encriptada dsp de pegar los script (DDL,DML) en la BD. 
-Para el uso del main (interfaz)'''
+'''iniciar una sola vez encriptacion_contrasenas_DB para actulizar la contraseña de texto a encriptada dsp de pegar los script (DDL,DML) en la BD. Para el uso del main (interfaz)'''
 #encriptacion_contrasenas_DB()
 iniciar_sesion()
