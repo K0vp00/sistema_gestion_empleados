@@ -1,3 +1,4 @@
+from encriptar import encriptacion_contrasenas_DB
 def interfaz(rut):
     from consultas_db import DB_consulta_validar
     from classes.empleados import CRUD_empleados
@@ -93,6 +94,7 @@ def iniciar_sesion():
     else:
         print("¡Hasta luego!")
 
+
 #Datos para pruebas
 ''' maria perez "activo" (adm)
     rut: 12345678-4
@@ -106,4 +108,7 @@ def iniciar_sesion():
     rut: 18654321-6
     clave: Jsoto456# '''
 
+'''iniciar una sola vez encriptacion_contrasenas_DB para actulizar la contraseña de texto a encriptada dsp de pegar los script (DDL,DML) en la BD. 
+Para el uso del main (interfaz)'''
+#encriptacion_contrasenas_DB()
 iniciar_sesion()

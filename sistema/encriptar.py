@@ -1,40 +1,24 @@
-def DB_consulta_validar(Consulta, rut): 
-    from conect_db import config
-    import mysql.connector   
-    cnx = None
-    cursor = None    
-    try:
-        # Establecer conexión
-        cnx = mysql.connector.connect(**config)
-        if cnx.is_connected():
-            cursor = cnx.cursor()
-            
-            # Ejecutar la consulta pasando 'rut' como tupla
-            cursor.execute(Consulta, (rut,))
+def encriptacion_contrasenas_DB():
+    # Encriptar contraseñas de la base de datos
+    from classes.empleados import Empleado
+    from consultas_db import DB_actualizar
 
-            # Obtener los resultados
-            rows = cursor.fetchall()
-            if rows:
-                return rows  # Retorna los resultados si se encuentran
-            else:
-                print("No se encontraron resultados para el RUT proporcionado.")
-                return None
+    contrasenas = [
+        "Mperez85!",
+        "Jsoto456#",
+        "LHerrera789&",
+    ]
+    
+    empleados = [
+        "12345678-4",
+        "20765432-7",
+        "18654321-6",
+    ]
 
-    except mysql.connector.Error as e:
-        print("Error al conectar o ejecutar la consulta en MySQL:", e)
-        return None
+    query = "UPDATE empleados SET contrasena = %s WHERE rut = %s"
 
-    finally:
-        # Cerrar el cursor y la conexión si están abiertos
-        if cursor:
-            cursor.close()
-        if cnx:
-            cnx.close()
-            print("Conexión cerrada")
-
-rut = input('Rut (con guion y digito verificador): ')
-query = "SELECT nombre_estado FROM empleados emp INNER JOIN estado est ON emp.estado = est.id_estado WHERE rut = %s;"
-if DB_consulta_validar(query,rut) == 'activo':
-    print('El empleado esta activo')
-else:
-    print('El empleado esta deshabilitado')
+    for i in range(len(contrasenas)):
+        # Encriptar la contraseña
+        contrasena_encriptada = Empleado.Encriptar(contrasenas[i])
+        # Actualizar la base de datos con el RUT y la contraseña encriptada
+        DB_actualizar(query,empleados[i], contrasena_encriptada )
