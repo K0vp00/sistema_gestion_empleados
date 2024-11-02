@@ -1,4 +1,11 @@
-class Informe:
+from classes.empleados import Empleados
+class Informe(Empleados):
+    def __init__(self, id, nombre_informe, fecha_creacion, id_empleado):
+        super().__init__(self,id_empleado)
+        self.__id = id
+        self.__nombre_informe = nombre_informe
+        self.__fecha_creacion = fecha_creacion
+        
 
 
     @staticmethod

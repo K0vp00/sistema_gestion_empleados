@@ -99,7 +99,7 @@ def DB_actualizar(query,rut,dato):
         if cnx.is_connected():
             cursor = cnx.cursor()
         
-            cursor.execute(query,(dato,rut))
+            cursor.execute(query,(rut,dato))
             
             # Confirmar los cambios para que se guarden
             cnx.commit()

@@ -1,6 +1,6 @@
 def encriptacion_contrasenas_DB():
     # Encriptar contraseñas de la base de datos
-    from classes.empleados import Empleado
+    from classes.empleados import Empleados
     from consultas_db import DB_actualizar
 
     contrasenas = [
@@ -19,6 +19,6 @@ def encriptacion_contrasenas_DB():
 
     for i in range(len(contrasenas)):
         # Encriptar la contraseña
-        contrasena_encriptada = Empleado.Encriptar(contrasenas[i])
+        contrasena_encriptada = Empleados.Encriptar(contrasenas[i])
         # Actualizar la base de datos con el RUT y la contraseña encriptada
         DB_actualizar(query,empleados[i], contrasena_encriptada )

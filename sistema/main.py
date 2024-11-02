@@ -11,24 +11,28 @@ def interfaz(rut):
         tipo_empleado = resultado[0][0]
 
         if tipo_empleado == "Administrador":
-            opcion = input('Elija una de las siguientes opciones: \n1.- Gestion empleados\n2.- Gestion informes\n3.- Gestion proyectos\nOpción: ')
+            opcion = input('Elija una de las siguientes opciones: \n1.- Gestion empleados\n2.- Gestion informes\n3.- Gestion proyectos\n4.- Salir\nOpción: ')
             if opcion == '1':
                 opcion = input('Elija una de las siguientes opciones: \n1.- Ingresar empleado\n2.- Cambiar estado (eliminar)\n3.- Ver empleados\nOpción: ')
                 if opcion == "1":
-                    CRUD_empleados().crear_empleado()
+                    CRUD_empleados.crear_empleado()
+                    interfaz(rut)
                 elif opcion == "2":
-                    CRUD_empleados().estado_empleado()
+                    CRUD_empleados.estado_empleado()
+                    interfaz(rut)
                 elif opcion == "3":
-                    CRUD_empleados().ver_empleados()
+                    CRUD_empleados.ver_empleados()
+                    interfaz(rut)
                 else:
                     print("Opción inválida.")
 
             elif opcion == "2":
                 opcion = input('Elija una de las siguientes opciones: \n1.- crear informe\n2.- Ver informe\nOpción: ')
                 if opcion == "1":
-                    Informe().crear_informe()
+                    Informe.crear_informe()
+                    interfaz(rut)
                 elif opcion == "2":
-                    Informe().ver_informes()
+                    Informe.ver_informes()
                     interfaz(rut)
                 else:
                     print("Opción inválida.")
@@ -36,30 +40,38 @@ def interfaz(rut):
             elif opcion == "3":
                 opcion = input('Elija una de las siguientes opciones: \n1.- crear proyecto\n2.- Ver proyectos\nOpción: ')
                 if opcion == "1":
-                    Proyectos().crear_proyecto()
+                    Proyectos.crear_proyecto()
+                    interfaz(rut)
                 elif opcion == "2":
-                    Proyectos().ver_proyectos()
+                    Proyectos.ver_proyectos()
+                    interfaz(rut)
                 else:
                     print("Opción inválida.")
+            elif opcion == "4":
+                print("Saliendo del sistema")
             else:
                 print("Opción inválida.")
 
 
-        elif tipo_empleado == "desarrollador":
+        elif tipo_empleado == "Desarrollador":
             opcion = input('Elija una de las siguientes opciones: \n1.- crear proyecto\n2.- Ver proyectos\nOpción: ')
             if opcion == "1":
-                Proyectos().crear_proyecto()
+                Proyectos.crear_proyecto()
+                interfaz(rut)
             elif opcion == "2":
-                Proyectos().ver_proyectos()
+                Proyectos.ver_proyectos()
+                interfaz(rut)
             else:
                 print("Opción inválida.")
 
         elif tipo_empleado == "Analista":
             opcion = input('Elija una de las siguientes opciones: \n1.- crear informe\n2.- Ver informe\nOpción: ')
             if opcion == "1":
-                Informe().crear_informe()
+                Informe.crear_informe()
+                interfaz(rut)
             elif opcion == "2":
-                Informe().ver_informes()
+                Informe.ver_informes()
+                interfaz(rut)
             else:
                 print("Opción inválida.")
         else:
@@ -68,7 +80,7 @@ def interfaz(rut):
         print("No se encontró el tipo de empleado asociado al RUT ingresado.")
 
 def iniciar_sesion():
-    from classes.empleados import Empleado
+    from classes.empleados import Empleados
     from consultas_db import DB_consulta_validar
     import getpass
 
@@ -80,7 +92,7 @@ def iniciar_sesion():
     estado = resultado[0][0].strip().lower() if resultado else None
     if estado == 'activo':
         contrasena = getpass.getpass("Introduce tu contraseña: ")
-        if Empleado.validarDatos(rut,contrasena):
+        if Empleados.validarDatos(rut,contrasena):
             print('\nBienvenido')
             interfaz(rut)
             return
@@ -93,16 +105,19 @@ def iniciar_sesion():
 #Datos para pruebas
 ''' maria perez "activo" (adm)
     rut: 12345678-4
-    clave: Mperez85!  '''
+    clave: Mperez85!
+    '''
 
 '''juan soto "desabilitado" (analista)
     rut: 20765432-7 
-    clave: Jsoto456# '''
+    clave: Jsoto456#
+    '''
 
 ''' luis herrera "activo" (desarrollador)
     rut: 18654321-6
-    clave: Jsoto456# '''
+    clave: Jsoto456#
+    '''
 
-'''iniciar una sola vez encriptacion_contrasenas_DB para actulizar la contraseña de texto a encriptada dsp de pegar los script (DDL,DML) en la BD. Para el uso del main (interfaz)'''
+'''iniciar una sola vez encriptacion_contrasenas_DB para actualizar la contraseña de texto a encriptada dsp de pegar los script (DDL,DML) en la BD. Para el uso del main (interfaz)'''
 #encriptacion_contrasenas_DB()
 iniciar_sesion()
