@@ -4,16 +4,16 @@ def interfaz(rut):
     from classes.empleados import CRUD_empleados
     from classes.informe import Informe
     from classes.proyectos import Proyectos
-    print('\n--------------------------------------------\n|Plataforma EcoTech Solutions|\n--------------------------------------------\n')
+    print('\n------------------------------\n|Plataforma EcoTech Solutions|\n------------------------------')
     query = "SELECT t.tipo FROM empleados e INNER JOIN tipoEmpleado t ON t.id_tipoEmpleado = e.id_tipoEmpleado where rut = %s;"
     resultado = DB_consulta_validar(query,rut)
     if resultado:
         tipo_empleado = resultado[0][0]
 
         if tipo_empleado == "Administrador":
-            opcion = input('Elija una de las siguientes opciones: \n1.- Gestion empleados\n2.- Gestion informes\n3.- Gestion proyectos\n4.- Salir\nOpción: ')
+            opcion = input('\nElija una de las siguientes opciones: \n1.- Gestion empleados\n2.- Gestion informes\n3.- Gestion proyectos\n4.- Salir\nOpción: ')
             if opcion == '1':
-                opcion = input('Elija una de las siguientes opciones: \n1.- Ingresar empleado\n2.- Cambiar estado (eliminar)\n3.- Ver empleados\nOpción: ')
+                opcion = input('\nElija una de las siguientes opciones: \n1.- Ingresar empleado\n2.- Cambiar estado (eliminar)\n3.- Ver empleados\n4.- Volver al menu principal\nOpción: ')
                 if opcion == "1":
                     CRUD_empleados.crear_empleado()
                     interfaz(rut)
@@ -23,27 +23,33 @@ def interfaz(rut):
                 elif opcion == "3":
                     CRUD_empleados.ver_empleados()
                     interfaz(rut)
+                elif opcion == "4":
+                    interfaz(rut)
                 else:
                     print("Opción inválida.")
 
             elif opcion == "2":
-                opcion = input('Elija una de las siguientes opciones: \n1.- crear informe\n2.- Ver informe\nOpción: ')
+                opcion = input('\nElija una de las siguientes opciones: \n1.- crear informe\n2.- Ver informe\n3.- Volver al menu principal\nOpción: ')
                 if opcion == "1":
                     Informe.crear_informe()
                     interfaz(rut)
                 elif opcion == "2":
                     Informe.ver_informes()
                     interfaz(rut)
+                elif opcion == "3":
+                    interfaz(rut)
                 else:
                     print("Opción inválida.")
                 
             elif opcion == "3":
-                opcion = input('Elija una de las siguientes opciones: \n1.- crear proyecto\n2.- Ver proyectos\nOpción: ')
+                opcion = input('\nElija una de las siguientes opciones: \n1.- crear proyecto\n2.- Ver proyectos\n3.- Volver al menu principal\nOpción: ')
                 if opcion == "1":
                     Proyectos.crear_proyecto()
                     interfaz(rut)
                 elif opcion == "2":
                     Proyectos.ver_proyectos()
+                    interfaz(rut)
+                elif opcion == "3":
                     interfaz(rut)
                 else:
                     print("Opción inválida.")
@@ -54,24 +60,28 @@ def interfaz(rut):
 
 
         elif tipo_empleado == "Desarrollador":
-            opcion = input('Elija una de las siguientes opciones: \n1.- crear proyecto\n2.- Ver proyectos\nOpción: ')
+            opcion = input('\nElija una de las siguientes opciones: \n1.- crear proyecto\n2.- Ver proyectos\n3.- Salir\nOpción: ')
             if opcion == "1":
                 Proyectos.crear_proyecto()
                 interfaz(rut)
             elif opcion == "2":
                 Proyectos.ver_proyectos()
                 interfaz(rut)
+            elif opcion == "3":
+                print("Saliendo del sistema")
             else:
                 print("Opción inválida.")
 
         elif tipo_empleado == "Analista":
-            opcion = input('Elija una de las siguientes opciones: \n1.- crear informe\n2.- Ver informe\nOpción: ')
+            opcion = input('\nElija una de las siguientes opciones: \n1.- crear informe\n2.- Ver informe\n3.- Salir\nOpción: ')
             if opcion == "1":
                 Informe.crear_informe()
                 interfaz(rut)
             elif opcion == "2":
                 Informe.ver_informes()
                 interfaz(rut)
+            elif opcion == "3":
+                print("Saliendo del sistema")
             else:
                 print("Opción inválida.")
         else:
@@ -115,7 +125,7 @@ def iniciar_sesion():
 
 ''' luis herrera "activo" (desarrollador)
     rut: 18654321-6
-    clave: Jsoto456#
+    clave: LHerrera789&
     '''
 
 '''iniciar una sola vez encriptacion_contrasenas_DB para actualizar la contraseña de texto a encriptada dsp de pegar los script (DDL,DML) en la BD. Para el uso del main (interfaz)'''
