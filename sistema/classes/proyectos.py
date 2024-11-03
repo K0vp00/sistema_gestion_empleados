@@ -20,7 +20,7 @@ class Proyectos():
     @staticmethod
     def ver_proyectos():
         from consultas_db import DB_consulta
-        query = '''SELECT nombre, descripcion, DATE_FORMAT,(fecha_inicio, '%d/%m/%y') as fecha_inicio, DATE_FORMAT(fecha_fin, '%d/%m/%y') as fecha_fin FROM proyectos;'''
+        query = '''SELECT nombre, descripcion, DATE_FORMAT(fecha_inicio, '%d/%m/%y') as fecha_inicio, DATE_FORMAT(fecha_fin, '%d/%m/%y') as fecha_fin FROM proyectos;'''
         DB_consulta(query)
     
     @staticmethod

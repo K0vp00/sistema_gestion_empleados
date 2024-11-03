@@ -57,7 +57,7 @@ class CRUD_empleados(Empleados):
         query = "UPDATE empleados SET estado = %s WHERE rut = %s;"
         try:
             # Ejecuta la consulta con los valores como una tupla
-            DB_actualizar(query,rut_empleado,dato)
+            DB_actualizar(query,dato,rut_empleado)
             print('Estado actualizado exitosamente.')
         except Exception as e:
             print(f"Ocurrió un error al actualizar el estado: {e}")

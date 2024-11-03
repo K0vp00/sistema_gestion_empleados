@@ -87,7 +87,7 @@ def DB_insertar(query,values):
             cnx.close()
             
 # Funcion para actualizar datos en la BD
-def DB_actualizar(query,rut,dato):
+def DB_actualizar(query,dato,rut):
     import mysql.connector
     from mysql.connector import Error
     from conect_db import config
@@ -99,7 +99,7 @@ def DB_actualizar(query,rut,dato):
         if cnx.is_connected():
             cursor = cnx.cursor()
         
-            cursor.execute(query,(rut,dato))
+            cursor.execute(query,(dato,rut))
             
             # Confirmar los cambios para que se guarden
             cnx.commit()
