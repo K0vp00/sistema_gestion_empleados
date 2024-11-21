@@ -1,4 +1,4 @@
-from classes.empleados import Empleados
+from modelos.empleados import Empleados
 class Informe(Empleados):
     def __init__(self, id, nombre_informe, fecha_creacion, id_empleado):
         super().__init__(self,id_empleado)
@@ -10,13 +10,13 @@ class Informe(Empleados):
 
     @staticmethod
     def ver_informes():
-        from consultas_db import DB_consulta
+        from sistema.datos.consultas_db import DB_consulta
         query = "SELECT nombre_informe, DATE_FORMAT(fecha_creacion, '%d/%m/%Y') as fecha_creacion, id_empleado FROM informe;"
         DB_consulta(query)
     
     @staticmethod
     def crear_informe():
-        from consultas_db import DB_insertar
+        from sistema.datos.consultas_db import DB_insertar
         import datetime
         while True:
             try:

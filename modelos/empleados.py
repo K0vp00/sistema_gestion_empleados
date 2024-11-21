@@ -1,5 +1,5 @@
-from classes.tipo_empleado import tipoEmpleado
-from classes.estado import Estado
+from modelos.tipo_empleado import tipoEmpleado
+from modelos.estado import Estado
 class Empleados(tipoEmpleado,Estado):
     def __init__(self, id, rut, nombre, direccion, telefono, correo, fecha_inicio, salario, fecha_nacimiento, contraseña, id_tipoEmpleado,id_estado):
         tipoEmpleado.__init__(self,id_tipoEmpleado)
@@ -18,8 +18,8 @@ class Empleados(tipoEmpleado,Estado):
 
     @staticmethod #Para determinar el metodo como estatico y no depender de una instancia para su uso, falicitando el la pnatalla de inicio
     def validarDatos(rut, contrasena):
-        from consultas_db import DB_consulta_validar
-        from classes.empleados import Empleados
+        from datos.consultas_db import DB_consulta_validar
+        from modelos.empleados import Empleados
         query = "SELECT contrasena FROM EMPLEADOS WHERE rut = %s "
         resultado = DB_consulta_validar(query,rut)
         if resultado :
@@ -46,7 +46,7 @@ class CRUD_empleados(Empleados):
 
     @staticmethod
     def estado_empleado():#"eliminar" 
-        from consultas_db import DB_actualizar
+        from datos.consultas_db import DB_actualizar
         rut_empleado = input('\nIngrese el RUT del empleado (con guion y digito verificador): ')
         dato = input('\nIngrese el valor\n1.- activado\n2.-deshabilitado\nOpcion: ')
         
@@ -64,8 +64,8 @@ class CRUD_empleados(Empleados):
 
     @staticmethod
     def crear_empleado():
-        from consultas_db import DB_insertar
-        from classes.empleados import Empleados
+        from datos.consultas_db import DB_insertar
+        from modelos.empleados import Empleados
         from datetime import datetime
         try:
             rut = input("Ingrese el RUT del empleado: ")
@@ -100,13 +100,12 @@ class CRUD_empleados(Empleados):
             print("Empleado creado con éxito.")
         except ValueError as e:
             print(f"Error al ingresar datos numéricos: {e}. Por favor, intente nuevamente.")
-               # Regresar al inicio del bucle para que el usuario intente de nuevo
+        # Regresar al inicio del bucle para que el usuario intente de nuevo
         except Exception as e:
             print(f"Ocurrió un error: {e}. Por favor, intente nuevamente.")
-           
 
     @staticmethod
     def ver_empleados():
-        from consultas_db import DB_consulta
+        from datos.consultas_db import DB_consulta
         query = '''SELECT rut, nombre,direccion, telefono, correo, DATE_FORMAT(fecha_inicio, '%d/%m/%Y'), salario, DATE_FORMAT(fecha_nacimiento, '%d/%m/%Y'), contrasena, id_tipoEmpleado, estado FROM EMPLEADOS'''
         DB_consulta(query)

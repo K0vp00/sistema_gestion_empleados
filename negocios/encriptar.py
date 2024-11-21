@@ -1,7 +1,7 @@
 def encriptacion_contrasenas_DB():
     # Encriptar contraseñas de la base de datos
-    from classes.empleados import Empleados
-    from consultas_db import DB_actualizar
+    from modelos.empleados import Empleados
+    from sistema.datos.consultas_db import DB_actualizar
 
     contrasenas = [
         "Mperez85!",

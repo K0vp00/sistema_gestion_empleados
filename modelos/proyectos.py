@@ -1,5 +1,5 @@
 import datetime
-class Proyectos():
+class Proyecto():
     def __init__(self,id_proyecto, nombre, descripcion, fecha_inicio, fecha_fin):
         self.__id_proyecto = id_proyecto
         self.__nombre = nombre
@@ -19,13 +19,13 @@ class Proyectos():
         
     @staticmethod
     def ver_proyectos():
-        from consultas_db import DB_consulta
+        from sistema.datos.consultas_db import DB_consulta
         query = '''SELECT nombre, descripcion, DATE_FORMAT(fecha_inicio, '%d/%m/%y') as fecha_inicio, DATE_FORMAT(fecha_fin, '%d/%m/%y') as fecha_fin FROM proyectos;'''
         DB_consulta(query)
     
     @staticmethod
     def crear_proyecto():
-        from consultas_db import DB_insertar
+        from sistema.datos.consultas_db import DB_insertar
         import datetime
         while True:
             try:

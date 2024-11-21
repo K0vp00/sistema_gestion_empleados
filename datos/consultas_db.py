@@ -1,6 +1,6 @@
 # Funcion para la validacion de datos con la BD
 def DB_consulta_validar(Consulta, rut): 
-    from conect_db import config
+    from auxiliares.conect_db import config
     import mysql.connector   
     cnx = None
     cursor = None    
@@ -33,7 +33,7 @@ def DB_consulta_validar(Consulta, rut):
             cnx.close()
 # Funcion para Consultar datos en la BD
 def DB_consulta(Consulta): 
-    from conect_db import config
+    from auxiliares.conect_db import config
     import mysql.connector 
     cnx = None
     cursor = None    
@@ -62,7 +62,7 @@ def DB_consulta(Consulta):
 def DB_insertar(query,values):
     import mysql.connector
     from mysql.connector import Error
-    from conect_db import config
+    from auxiliares.conect_db import config
     cnx = None
     cursor = None
     try:
@@ -90,7 +90,7 @@ def DB_insertar(query,values):
 def DB_actualizar(query,dato,rut):
     import mysql.connector
     from mysql.connector import Error
-    from conect_db import config
+    from auxiliares.conect_db import config
     cnx = None
     cursor = None
     try:

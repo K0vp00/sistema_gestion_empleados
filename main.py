@@ -1,9 +1,9 @@
-from encriptar import encriptacion_contrasenas_DB
+from negocios.encriptar import encriptacion_contrasenas_DB
 def interfaz(rut):
-    from consultas_db import DB_consulta_validar
-    from classes.empleados import CRUD_empleados
-    from classes.informe import Informe
-    from classes.proyectos import Proyectos
+    from datos.consultas_db import DB_consulta_validar
+    from modelos.empleados import CRUD_empleados
+    from modelos.informe import Informe
+    from modelos.proyectos import Proyectos
     print('\n------------------------------\n|Plataforma EcoTech Solutions|\n------------------------------')
     query = "SELECT t.tipo FROM empleados e INNER JOIN tipoEmpleado t ON t.id_tipoEmpleado = e.id_tipoEmpleado where rut = %s;"
     resultado = DB_consulta_validar(query,rut)
@@ -90,8 +90,8 @@ def interfaz(rut):
         print("No se encontró el tipo de empleado asociado al RUT ingresado.")
 
 def iniciar_sesion():
-    from classes.empleados import Empleados
-    from consultas_db import DB_consulta_validar
+    from modelos.empleados import Empleados
+    from datos.consultas_db import DB_consulta_validar
     import getpass
 
     print('--------------------------------------------\n|Bienvenido al sistema de EcoTech Solutions|\n--------------------------------------------\n\nIngrese sus credenciales: \n')
